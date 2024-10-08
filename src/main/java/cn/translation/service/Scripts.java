@@ -246,7 +246,7 @@ public class Scripts {
                     }
                     sb.append(line).append("\n");
                 }
-                if (!(translation.equals("1") || translation.equals("2"))) {
+                if ((translation.equals("1") || translation.equals("2"))) {
                     printWriter = new PrintWriter(new FileWriter(filePath));
                     printWriter.print(sb);
                     printWriter.close();

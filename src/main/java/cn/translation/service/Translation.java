@@ -46,6 +46,16 @@ public class Translation {
                         String query = null;
                         String name = null;
                         if (line.contains(",")) {
+                            String s = line.substring(line.indexOf("=") + 1, line.length());
+                            s = s.replaceAll("\t", "");
+                            s = s.replaceAll(" ", "");
+                            String s1 = s.substring(s.length() - 1);
+                            if (!s1.equals(",")) {
+                                System.out.println(line);
+                                System.out.println(s);
+                                System.out.println(s1);
+                                line = line + ",";
+                            }
                             query = line.substring(line.indexOf("=") + 1, line.lastIndexOf(","));
                             name = line.substring(line.indexOf("=") + 1, line.lastIndexOf(",") + 1);
                             ;
@@ -55,7 +65,6 @@ public class Translation {
                         }
                         query = query.replaceAll("\"", "");
                         query = query.replaceAll("\t", "");
-                        query = query.replaceAll(",", "");
                         if (CharacterJudgment.doesItContainChinese(query)) {
                             sb.append(line).append("\n");
                             continue;
@@ -155,7 +164,7 @@ public class Translation {
                     }
                     sb.append(line).append("\n");
                 }
-                if (!(translation.equals("1") || translation.equals("2"))) {
+                if ((translation.equals("1") || translation.equals("2"))) {
                     printWriter = new PrintWriter(new FileWriter(filePath));
                     printWriter.print(sb);
                     printWriter.close();
